@@ -2,6 +2,7 @@ import Modal from 'react-modal'
 import { useModalWishlist } from '../context/ModalWishlistContext'
 import { useMovies } from '../context/MoviesContext'
 import { FaTrash } from 'react-icons/fa';
+import { ShoppingCart } from 'phosphor-react' 
 
 export function FloatWishlistMenu() {
   const { openModalWishlist, handleCloseModalWishlist } = useModalWishlist()
@@ -28,9 +29,11 @@ export function FloatWishlistMenu() {
                     <img className='w-10 h-10' src={process.env.NEXT_PUBLIC_API_IMAGE + movie.poster_path} alt={movie.title} />
                     <p className="text-xs">{movie.title}</p>
                   </div>
-                  <span className="text-xs">1</span>
                   <span className="text-xs">R$ 79.00</span>
-                  <div>
+                  <div className="flex gap-2 w-10">
+                    <button>
+                      <ShoppingCart size={20} />
+                    </button>
                     <button>
                       <FaTrash />
                     </button>
