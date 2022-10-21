@@ -11,6 +11,10 @@ interface MoviesListProps {
   title: string
   release_date: string
   poster_path: string
+  quantity?: number
+  price?: string
+  inCart?: boolean
+  wishList?: boolean
 }
 
 type MoviesListResponse = {
@@ -33,7 +37,9 @@ export default function Home({ moviesData }: MoviesListResponse) {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const responseMovies = await api.get(`popular?api_key=${process.env.API_KEY}`)
+  const responseMovies = await api.get(
+    `popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}`,
+  )
   const moviesData = responseMovies.data.results
 
   return {
