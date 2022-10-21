@@ -1,5 +1,5 @@
 import { HeartStraight } from 'phosphor-react'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AiTwotoneStar } from 'react-icons/ai'
 import { useMovies } from '../context/MoviesContext'
 import { api } from '../services/api'
@@ -18,7 +18,7 @@ type MoviesListResponse = {
 
 export function Movies({ moviesData }: MoviesListResponse) {
   const [currentPage, setCurrentPage] = useState(2)
-  const { moviesList, setMoviesList, handleAddItemToCart, handleAddItemToWishList } = useMovies()
+  const { setMoviesList, handleAddItemToCart, handleAddItemToWishList } = useMovies()
 
   // async function newMovies() {
   //   const responseNewMovies = await api.get(

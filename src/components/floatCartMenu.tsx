@@ -1,23 +1,24 @@
 import Modal from 'react-modal'
-import { useModal } from '../context/ModalContext'
+import { useModalCart } from '../context/ModalCartContext'
 import { useMovies } from '../context/MoviesContext'
 import { FaTrash } from 'react-icons/fa';
 
-export function FloatMenu() {
-  const { openModal, hanleCloseModal } = useModal()
+export function FloatCartMenu() {
+  const { openModalCart, handleCloseModalCart } = useModalCart()
   const { moviesList } = useMovies()
   return (
     <>
       <Modal
-        isOpen={openModal}
-        onRequestClose={hanleCloseModal}
+        ariaHideApp={false}
+        isOpen={openModalCart}
+        onRequestClose={handleCloseModalCart}
         overlayClassName='react-modal-overlay '
         className='react-modal-content animate-pop-up-menu'
       >
-        <section className='flex flex-col gap-3 justify-between h-screen overflow-scroll px-4 py-4'>
+        <section className='flex flex-col gap-3 justify-between h-screen overflow-y-scroll px-4 py-4'>
           <div className='flex flex-col gap-4'>
             <div className='flex justify-between'>
-              <button onClick={hanleCloseModal}>X</button>
+              <button onClick={handleCloseModalCart}>X</button>
               <h2 className='font-bold'>Meu Carrinho</h2>
             </div>
             {moviesList.map((movie) =>

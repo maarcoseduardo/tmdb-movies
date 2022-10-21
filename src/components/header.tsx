@@ -1,10 +1,13 @@
 import { BsSearch } from 'react-icons/bs'
 import { HeartStraight, ShoppingCart } from 'phosphor-react'
-import { FloatMenu } from './floatMenu'
-import { useModal } from '../context/ModalContext'
+import { FloatCartMenu } from './floatCartMenu'
+import { useModalCart } from '../context/ModalCartContext'
+import { useModalWishlist } from '../context/ModalWishlistContext'
+import { FloatWishlistMenu } from './floatWishlistMenu'
 
 export function Header() {
-  const { hanleOpenModal } = useModal()
+  const { handleOpenModalCart } = useModalCart()
+  const { handleOpenModalWishlist } = useModalWishlist()
   
   return (
     <>
@@ -20,16 +23,17 @@ export function Header() {
             <BsSearch size='18' />
           </div>
           <nav className='flex justify-between w-24'>
-            <button onClick={hanleOpenModal}>
+            <button onClick={handleOpenModalWishlist}>
               <HeartStraight size={32} color='white' />
             </button>
-            <button onClick={hanleOpenModal}>
+            <button onClick={handleOpenModalCart}>
               <ShoppingCart size={32} color='white' />
             </button>
           </nav>
         </div>
       </header>
-      <FloatMenu />
+      <FloatCartMenu />
+      <FloatWishlistMenu />
     </>
   )
 }
