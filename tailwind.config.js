@@ -8,12 +8,35 @@ module.exports = {
       sans: ['Roboto', 'sans-serif']
     },
     colors: {
-      'gray-light-200': '#C3CFD9',
+      'gray-light-200': '#C3CFE9',
       'green-light-200': '#8DD7CF',
       'yellow-500': '#FBE192',
       'purple-dark-600': '#6558F5',
     },
-    extend: {},
+    extend: {
+      animation: {
+        'pop-up-menu': 'roll-left 1.1s ease',
+        'transition-smooth-bg': 'fade-in-smooth 1s ease'
+      },
+      keyframes: {
+        'roll-left': {
+          '100%': {
+            transform: 'translateX(0)',
+          },
+          '0%': {
+            transform: 'translateX(100%)',
+          },
+        },
+        'fade-in-smooth': {
+          '0': {
+            'background-color': ''
+          },
+          '100%': {
+            'background-color': 'rgba(0,0,0, 0.5)'
+          }
+        }
+      }
+    },
   },
   plugins: [],
 }
