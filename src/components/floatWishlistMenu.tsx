@@ -1,12 +1,12 @@
 import Modal from 'react-modal'
 import { useModalWishlist } from '../context/ModalWishlistContext'
-import { useMovies } from '../context/MoviesContext'
 import { FaTrash } from 'react-icons/fa';
 import { ShoppingCart } from 'phosphor-react' 
+import { useMovies } from '../context/MoviesContext';
 
 export function FloatWishlistMenu() {
   const { openModalWishlist, handleCloseModalWishlist } = useModalWishlist()
-  const { moviesList } = useMovies()
+  const { moviesList, handleAddItemToCart} = useMovies()
   return (
     <>
       <Modal
@@ -31,7 +31,7 @@ export function FloatWishlistMenu() {
                   </div>
                   <span className="text-xs">R$ 79.00</span>
                   <div className="flex gap-2 w-10">
-                    <button>
+                    <button onClick={() => handleAddItemToCart(movie.id)}>
                       <ShoppingCart size={20} />
                     </button>
                     <button>
@@ -49,3 +49,7 @@ export function FloatWishlistMenu() {
     </>
   )
 }
+function handleAddItemToCart(id: any): void {
+  throw new Error('Function not implemented.');
+}
+

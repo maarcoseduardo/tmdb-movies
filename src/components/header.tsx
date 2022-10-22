@@ -11,7 +11,7 @@ export function Header() {
   
   return (
     <>
-      <header className='bg-green-light-200 fixed w-full'>
+      <header className='bg-green-light-200 z-10 fixed w-full'>
         <div className='max-w-7xl w-full h-28 mx-auto px-4 flex flex-wrap sm:h-20 justify-between items-center'>
           <div className=''>Movies</div>
           <div className='flex items-center w-96 px-2 bg-[#fff] rounded'>
