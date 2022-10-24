@@ -4,14 +4,46 @@ import { FloatCartMenu } from './floatCartMenu'
 import { useModalCart } from '../context/ModalCartContext'
 import { useModalWishlist } from '../context/ModalWishlistContext'
 import { FloatWishlistMenu } from './floatWishlistMenu'
+import { useEffect, useState } from 'react'
+import { useMovies } from '../context/MoviesContext'
+import { api, api_searchedMovies } from '../services/api'
 
 export function Header() {
   const { handleOpenModalCart } = useModalCart()
   const { handleOpenModalWishlist } = useModalWishlist()
+  const [search, setSearch] = useState('');
+  const { setMoviesList } = useMovies()
+
+  async function getSearchedMovies(){
+    const searchMovies = await api_searchedMovies.get(`?api_key=${process.env.NEXT_PUBLIC_API_KEY}&query=${search}&page=1`)
   
+    const responseMovies = await searchMovies.data.results
+
+    setMoviesList(responseMovies)
+  }
+  
+  async function getDefaultMovies(){
+    const responseMovies = await api.get(
+      `popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}`,
+    )
+    const moviesData = await responseMovies.data.results
+
+    setMoviesList(moviesData)
+  }
+
+  useEffect(() => {
+    if(!search){
+      getDefaultMovies()
+      return 
+    } else {
+      getSearchedMovies()
+    }
+    
+  },[search])
+
   return (
     <>
-      <header className='bg-green-light-200 fixed w-full'>
+      <header className='bg-green-light-200 z-10 fixed w-full'>
         <div className='max-w-7xl w-full h-28 mx-auto px-4 flex flex-wrap sm:h-20 justify-between items-center'>
           <div className=''>Movies</div>
           <div className='flex items-center w-96 px-2 bg-[#fff] rounded'>
@@ -19,6 +51,7 @@ export function Header() {
               className='w-full h-10 px-2 border-none focus:outline-none'
               type='text'
               placeholder='Pesquisa'
+              onChange={(event) => setSearch(event.currentTarget.value)}
             />
             <BsSearch size='18' />
           </div>
