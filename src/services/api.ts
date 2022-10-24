@@ -6,3 +6,6 @@ export const api = axios.create({
 export const api_images = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_IMAGE,
 })
+export const api_searchedMovies = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_SEARCH,
+})

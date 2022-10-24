@@ -40,7 +40,7 @@ export function MovieProvider({ children }: MovieCartProviderProps) {
   )
 }
 
-export function useMovies() {
+export function useMoviesInCart() {
   const context = useContext(MoviesCartContext)
 
   const { moviesList, setMoviesList } = context

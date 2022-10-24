@@ -57,7 +57,7 @@ export function Movies({ moviesData }: MoviesListResponse) {
       <p>Pagina Atual</p>
       {currentPage}
       <ul className='max-w-7xl w-full py-8 px-4 mx-auto mt-12 grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-        {moviesData.map((movies) => (
+        {<p>Loading</p> && moviesData.map((movies) => (
           <li
             className='mx-auto rounded-lg overflow-hidden cursor-pointer relative hover:brightness-90 transition duration-300'
             key={movies.id}

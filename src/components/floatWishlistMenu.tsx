@@ -6,7 +6,7 @@ import { useMovies } from '../context/MoviesContext';
 
 export function FloatWishlistMenu() {
   const { openModalWishlist, handleCloseModalWishlist } = useModalWishlist()
-  const { moviesList, handleAddItemToCart} = useMovies()
+  const { moviesList} = useMovies()
   return (
     <>
       <Modal
