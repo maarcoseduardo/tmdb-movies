@@ -11,23 +11,17 @@ import { api, api_searchedMovies } from '../services/api'
 export function Header() {
   const { handleOpenModalCart } = useModalCart()
   const { handleOpenModalWishlist } = useModalWishlist()
-  const [search, setSearch] = useState('');
-  const { setMoviesList } = useMovies()
+  const { search, setSearch, setMoviesList } = useMovies()
 
   async function getSearchedMovies(){
     const searchMovies = await api_searchedMovies.get(`?api_key=${process.env.NEXT_PUBLIC_API_KEY}&query=${search}&page=1`)
-  
     const responseMovies = await searchMovies.data.results
-
     setMoviesList(responseMovies)
   }
   
   async function getDefaultMovies(){
-    const responseMovies = await api.get(
-      `popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}`,
-    )
+    const responseMovies = await api.get(`popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}`)
     const moviesData = await responseMovies.data.results
-
     setMoviesList(moviesData)
   }
 

@@ -19,6 +19,8 @@ interface MoviesListResponse {
 interface MovieContextValues {
   moviesList: MoviesListResponse[]
   setMoviesList: React.Dispatch<React.SetStateAction<MoviesListResponse[]>>
+  search: string
+  setSearch: React.Dispatch<React.SetStateAction<string>>
   handleAddItemToCart: (id: number) => void
   handleAddItemToWishList: (id: number) => void
 }
@@ -26,6 +28,8 @@ interface MovieContextValues {
 const defaultMovieContextValues: MovieContextValues = {
   moviesList: [],
   setMoviesList: () => [],
+  search: '',
+  setSearch: () => '',
   handleAddItemToCart: (id: number) => {},
   handleAddItemToWishList: (id: number) => {}
 }
@@ -34,6 +38,7 @@ export const MoviesContext = createContext(defaultMovieContextValues)
 
 export function MovieProvider({ children }: MovieProviderProps) {
   const [moviesList, setMoviesList] = useState<MoviesListResponse[]>([])
+  const [search, setSearch] = useState('');
 
   function handleAddItemToCart(id: number) {
     const tempMovies = [...moviesList]
@@ -66,6 +71,8 @@ export function MovieProvider({ children }: MovieProviderProps) {
       value={{
         moviesList,
         setMoviesList,
+        search,
+        setSearch,
         handleAddItemToCart,
         handleAddItemToWishList
       }}
@@ -78,7 +85,7 @@ export function MovieProvider({ children }: MovieProviderProps) {
 export function useMovies() {
   const context = useContext(MoviesContext)
 
-  const { moviesList, setMoviesList, handleAddItemToCart, handleAddItemToWishList } = context
+  const { moviesList, setMoviesList, handleAddItemToCart, handleAddItemToWishList, search, setSearch } = context
 
-  return { moviesList, setMoviesList, handleAddItemToCart, handleAddItemToWishList }
+  return { moviesList, setMoviesList, handleAddItemToCart, handleAddItemToWishList, search, setSearch }
 }

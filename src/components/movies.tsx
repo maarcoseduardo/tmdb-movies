@@ -1,8 +1,10 @@
 import { HeartStraight } from 'phosphor-react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { GoStar } from 'react-icons/go'
 import { useMovies } from '../context/MoviesContext'
-import { api } from '../services/api'
+import { api, api_searchedMovies } from '../services/api'
+import InfiniteScroll from 'react-infinite-scroll-component'
+
 
 interface MoviesListProps {
   id: number
@@ -18,46 +20,32 @@ type MoviesListResponse = {
 
 export function Movies({ moviesData }: MoviesListResponse) {
   const [currentPage, setCurrentPage] = useState(2)
-  const { setMoviesList, handleAddItemToCart, handleAddItemToWishList } = useMovies()
-
-  // async function newMovies() {
-  //   const responseNewMovies = await api.get(
-  //     `popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=${currentPage}`,
-  //   )
-  //   const responseData = await responseNewMovies.data.results
-
-  //   setMoviesList((oldState) => [...oldState, ...responseData])
-  // }
-  // useEffect(() => {
-  //   newMovies()
-  // }, [currentPage])
-
-  useEffect(() => {
-    const responseNewMovies = api
-      .get(
-        `popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=${currentPage}`,
-      )
-      .then((responseData) => console.log(responseData.data))
-  }, [currentPage])
-
-  useEffect(() => {
-    const intersectionObserver = new IntersectionObserver((entries) => {
-      if (entries.some((entry) => entry.isIntersecting)) {
-        setCurrentPage((currentPageState) => currentPageState + 1)
-      }
-    })
-
-    intersectionObserver.observe(document.querySelector('#sentinela'))
-
-    return () => intersectionObserver.disconnect()
-  }, [])
-
+  const { search, setSearch, moviesList, setMoviesList, handleAddItemToCart, handleAddItemToWishList } = useMovies()
+  
+  async function newMovies() {
+    if(!search){
+      const responseNewMovies = await api.get(`popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=${currentPage}`)
+      const responseData = await responseNewMovies.data.results
+      setMoviesList((oldState) => [...oldState, ...responseData])
+      setCurrentPage( currentPage + 1)
+      
+    } else {
+      const responseNewMovies = await api_searchedMovies.get(`?api_key=${process.env.NEXT_PUBLIC_API_KEY}&query=${search}&page=${currentPage}`)
+      const responseData = await responseNewMovies.data.results
+      setMoviesList((oldState) => [...oldState, ...responseData])
+      setCurrentPage( currentPage + 1)
+    }
+  }
   return (
     <section>
-      <p>Pagina Atual</p>
-      {currentPage}
-      <ul className='max-w-7xl w-full py-8 px-4 mx-auto mt-12 grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-        {<p>Loading</p> && moviesData.map((movies) => (
+      <ul>
+        <InfiniteScroll 
+        dataLength={moviesData.length} 
+        next={newMovies} 
+        hasMore={true} loader={<p>loading...</p>} 
+        className="max-w-7xl w-full py-30 px-4 mx-auto grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        >
+        {moviesData.map((movies) => (
           <li
             className='mx-auto rounded-lg overflow-hidden cursor-pointer relative hover:brightness-90 transition duration-300'
             key={movies.id}
@@ -67,7 +55,7 @@ export function Movies({ moviesData }: MoviesListResponse) {
                 <HeartStraight size={32} color='red'/>
               </button>
             </div>
-            <img src={process.env.NEXT_PUBLIC_API_IMAGE + movies.poster_path} />
+              <img src={process.env.NEXT_PUBLIC_API_IMAGE + movies.poster_path} alt={movies.title}/>
             <div className="flex justify-center items-center absolute h-14 w-full bottom-40 bg-gradient-to-t from-[#000] to-transparent">
               <span className="text-[#fff]">{movies.release_date}</span>
             </div>
@@ -86,7 +74,7 @@ export function Movies({ moviesData }: MoviesListResponse) {
             </div>
           </li>
         ))}
-        <li id='sentinela'></li>
+        </InfiniteScroll>
       </ul>
     </section>
   )
