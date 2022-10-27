@@ -4,7 +4,8 @@ import { GoStar } from 'react-icons/go'
 import { useMovies } from '../context/MoviesContext'
 import { api, api_searchedMovies } from '../services/api'
 import InfiniteScroll from 'react-infinite-scroll-component'
-
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 interface MoviesListProps {
   id: number
@@ -30,6 +31,7 @@ export function Movies({ moviesData }: MoviesListResponse) {
       setCurrentPage( currentPage + 1)
       
     } else {
+      setCurrentPage(2)
       const responseNewMovies = await api_searchedMovies.get(`?api_key=${process.env.NEXT_PUBLIC_API_KEY}&query=${search}&page=${currentPage}`)
       const responseData = await responseNewMovies.data.results
       setMoviesList((oldState) => [...oldState, ...responseData])
@@ -55,7 +57,7 @@ export function Movies({ moviesData }: MoviesListResponse) {
                 <HeartStraight size={32} color='red'/>
               </button>
             </div>
-              <img src={process.env.NEXT_PUBLIC_API_IMAGE + movies.poster_path} alt={movies.title}/>
+              <LazyLoadImage src={process.env.NEXT_PUBLIC_API_IMAGE + movies.poster_path} alt={movies.title} effect='blur'/>
             <div className="flex justify-center items-center absolute h-14 w-full bottom-40 bg-gradient-to-t from-[#000] to-transparent">
               <span className="text-[#fff]">{movies.release_date}</span>
             </div>
