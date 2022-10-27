@@ -22,13 +22,18 @@ type MoviesListResponse = {
 export function Movies({ moviesData }: MoviesListResponse) {
   const [currentPage, setCurrentPage] = useState(2)
   const { search, setSearch, moviesList, setMoviesList, handleAddItemToCart, handleAddItemToWishList } = useMovies()
-  
+  const [hasMore, setHasMore] = useState(true)
+
   async function newMovies() {
+
     if(!search){
       const responseNewMovies = await api.get(`popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=${currentPage}`)
       const responseData = await responseNewMovies.data.results
       setMoviesList((oldState) => [...oldState, ...responseData])
       setCurrentPage( currentPage + 1)
+      if(!responseData.length){
+        setHasMore(false)
+      }
       
     } else {
       setCurrentPage(2)
@@ -36,6 +41,9 @@ export function Movies({ moviesData }: MoviesListResponse) {
       const responseData = await responseNewMovies.data.results
       setMoviesList((oldState) => [...oldState, ...responseData])
       setCurrentPage( currentPage + 1)
+      if(!responseData.length){
+        setHasMore(false)
+      }
     }
   }
   return (
@@ -43,9 +51,10 @@ export function Movies({ moviesData }: MoviesListResponse) {
       <ul>
         <InfiniteScroll 
         dataLength={moviesData.length} 
-        next={newMovies} 
-        hasMore={true} loader={<p>loading...</p>} 
-        className="max-w-7xl w-full py-30 px-4 mx-auto grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        next={newMovies}
+        hasMore={hasMore} 
+        loader={<p>loading...</p>} 
+        className="max-w-7xl w-full py-32 px-4 mx-auto grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
         >
         {moviesData.map((movies) => (
           <li
@@ -57,7 +66,11 @@ export function Movies({ moviesData }: MoviesListResponse) {
                 <HeartStraight size={32} color='red'/>
               </button>
             </div>
-              <LazyLoadImage src={process.env.NEXT_PUBLIC_API_IMAGE + movies.poster_path} alt={movies.title} effect='blur'/>
+              <LazyLoadImage 
+              src={process.env.NEXT_PUBLIC_API_IMAGE + movies.poster_path}
+              alt={movies.title} effect='blur'
+              placeholderSrc={process.env.NEXT_PUBLIC_API_IMAGE + movies.poster_path}
+              />
             <div className="flex justify-center items-center absolute h-14 w-full bottom-40 bg-gradient-to-t from-[#000] to-transparent">
               <span className="text-[#fff]">{movies.release_date}</span>
             </div>
