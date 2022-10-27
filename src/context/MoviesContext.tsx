@@ -21,6 +21,10 @@ interface MovieContextValues {
   setMoviesList: React.Dispatch<React.SetStateAction<MoviesListResponse[]>>
   search: string
   setSearch: React.Dispatch<React.SetStateAction<string>>
+  loadingPage: boolean,
+  setLoadingPage: React.Dispatch<React.SetStateAction<boolean>>
+  currentPage: number
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>
   handleAddItemToCart: (id: number) => void
   handleAddItemToWishList: (id: number) => void
 }
@@ -30,6 +34,10 @@ const defaultMovieContextValues: MovieContextValues = {
   setMoviesList: () => [],
   search: '',
   setSearch: () => '',
+  loadingPage: false,
+  setLoadingPage: () => false,
+  currentPage: 2,
+  setCurrentPage: () => {},
   handleAddItemToCart: (id: number) => {},
   handleAddItemToWishList: (id: number) => {}
 }
@@ -39,6 +47,8 @@ export const MoviesContext = createContext(defaultMovieContextValues)
 export function MovieProvider({ children }: MovieProviderProps) {
   const [moviesList, setMoviesList] = useState<MoviesListResponse[]>([])
   const [search, setSearch] = useState('');
+  const [currentPage, setCurrentPage] = useState(2)
+  const [loadingPage, setLoadingPage] = useState(false);
 
   function handleAddItemToCart(id: number) {
     const tempMovies = [...moviesList]
@@ -47,10 +57,8 @@ export function MovieProvider({ children }: MovieProviderProps) {
     if(selectedMovie){
       selectedMovie.inCart = true
     }
-
-    console.log(selectedMovie);
-    
   }
+
   function handleAddItemToWishList(id: number) {
     const tempMovies = [...moviesList]
     const selectedMovie = tempMovies.find((movie) => movie.id === id)
@@ -58,13 +66,7 @@ export function MovieProvider({ children }: MovieProviderProps) {
     if(selectedMovie){
       selectedMovie.wishList = true
     }
-    console.log(selectedMovie);
-    
   }
-
-  function handleIncrementItemInCart(id: number) {}
-  function handleDecrementItemInCart(id: number) {}
-  function handleRemoveItemToCart(id: number) {}
 
   return (
     <MoviesContext.Provider
@@ -73,6 +75,10 @@ export function MovieProvider({ children }: MovieProviderProps) {
         setMoviesList,
         search,
         setSearch,
+        loadingPage,
+        setLoadingPage,
+        currentPage,
+        setCurrentPage,
         handleAddItemToCart,
         handleAddItemToWishList
       }}
@@ -85,7 +91,7 @@ export function MovieProvider({ children }: MovieProviderProps) {
 export function useMovies() {
   const context = useContext(MoviesContext)
 
-  const { moviesList, setMoviesList, handleAddItemToCart, handleAddItemToWishList, search, setSearch } = context
+  const { moviesList, setMoviesList, handleAddItemToCart, handleAddItemToWishList, search, setSearch, loadingPage, setLoadingPage, currentPage, setCurrentPage } = context
 
-  return { moviesList, setMoviesList, handleAddItemToCart, handleAddItemToWishList, search, setSearch }
+  return { moviesList, setMoviesList, handleAddItemToCart, handleAddItemToWishList, search, setSearch, loadingPage, setLoadingPage, currentPage, setCurrentPage }
 }

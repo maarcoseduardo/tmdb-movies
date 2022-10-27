@@ -28,6 +28,11 @@ export const MoviesCartContext = createContext(defaultMovieCartContextValues)
 export function MovieProvider({ children }: MovieCartProviderProps) {
   const [moviesList, setMoviesList] = useState<MoviesCartListResponse[]>([])
 
+
+  function handleIncrementItemInCart(id: number) {}
+  function handleDecrementItemInCart(id: number) {}
+  function handleRemoveItemToCart(id: number) {}
+
   return (
     <MoviesCartContext.Provider
       value={{

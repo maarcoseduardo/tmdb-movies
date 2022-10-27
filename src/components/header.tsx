@@ -4,7 +4,7 @@ import { FloatCartMenu } from './floatCartMenu'
 import { useModalCart } from '../context/ModalCartContext'
 import { useModalWishlist } from '../context/ModalWishlistContext'
 import { FloatWishlistMenu } from './floatWishlistMenu'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useMovies } from '../context/MoviesContext'
 import { api, api_searchedMovies } from '../services/api'
 
@@ -32,7 +32,6 @@ export function Header() {
     } else {
       getSearchedMovies()
     }
-    
   },[search])
 
   return (

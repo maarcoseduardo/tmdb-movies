@@ -16,7 +16,8 @@ module.exports = {
     extend: {
       animation: {
         'pop-up-menu': 'roll-left 1.1s ease',
-        'transition-smooth-bg': 'fade-in-smooth 1s ease'
+        'transition-smooth-bg': 'fade-in-smooth 1s ease',
+        'scroll-down': 'going-up 1.4s ease' 
       },
       keyframes: {
         'roll-left': {
@@ -34,8 +35,20 @@ module.exports = {
           '100%': {
             'background-color': 'rgba(0,0,0, 0.5)'
           }
+        },
+        'going-up': {
+          '0%': {
+            transform: 'translateY(20%)',
+            opacity: 0,
+          },
+          '100%': {
+            transform: 'translateY(0)',
+            opacity: 1
+          } 
         }
-      }
+      },
+
+      
     },
   },
   plugins: [],
