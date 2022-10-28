@@ -17,7 +17,7 @@ module.exports = {
       animation: {
         'pop-up-menu': 'roll-left 1.1s ease',
         'transition-smooth-bg': 'fade-in-smooth 1s ease',
-        'scroll-down': 'going-up 1.4s ease' 
+        'scroll-down': 'going-up 1.6s ease' 
       },
       keyframes: {
         'roll-left': {

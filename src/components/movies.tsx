@@ -55,11 +55,8 @@ export function Movies({ moviesData }: MoviesListResponse) {
         className="max-w-7xl w-full py-32 px-4 mx-auto grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
         >
         {moviesData.map((movies) => (
-          <LazyLoadComponent>
-          <li
-            className='mx-auto rounded-lg overflow-hidden cursor-pointer relative animate-scroll-down hover:brightness-90 transition duration-300'
-            key={movies.id}
-          >
+          <LazyLoadComponent key={movies.id}>
+          <li className='mx-auto rounded-lg overflow-hidden cursor-pointer relative animate-scroll-down hover:brightness-90 transition duration-300'>
             <div className='z-[2] absolute h-16 w-full bg-gradient-to-b from-[#000] to-transparent'>
               <button onClick={() => handleAddItemToWishList(movies.id)} className='absolute top-4 right-4'>
                 <HeartStraight size={32} color='red'/>
