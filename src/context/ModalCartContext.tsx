@@ -1,23 +1,7 @@
-import React, { createContext, useState, useContext, ReactNode } from 'react'
+import React, { createContext, useState, useContext } from 'react'
+import { ModalProviderProps, defaultCartValues } from '../utils/types'
 
-interface ModalProviderProps {
-  children: ReactNode
-}
-interface ContextValues {
-  openModalCart: boolean
-  setOpenModalCart: React.Dispatch<React.SetStateAction<boolean>>
-  handleOpenModalCart: React.Dispatch<React.SetStateAction<any>>
-  handleCloseModalCart: React.Dispatch<React.SetStateAction<any | any>>
-}
-
-const defaultValues: ContextValues = {
-  openModalCart: false,
-  setOpenModalCart: () => false,
-  handleOpenModalCart: () => true,
-  handleCloseModalCart: () => false,
-}
-
-const ModalCartContext = createContext(defaultValues)
+const ModalCartContext = createContext(defaultCartValues)
 
 export function ModalCartContextProvider({ children }: ModalProviderProps) {
   const [openModalCart, setOpenModalCart] = useState(false)
