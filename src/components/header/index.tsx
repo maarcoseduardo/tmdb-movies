@@ -1,12 +1,12 @@
 import { BsSearch } from 'react-icons/bs'
 import { HeartStraight, ShoppingCart } from 'phosphor-react'
-import { FloatCartMenu } from './floatCartMenu'
-import { useModalCart } from '../context/ModalCartContext'
-import { useModalWishlist } from '../context/ModalWishlistContext'
-import { FloatWishlistMenu } from './floatWishlistMenu'
+import { useModalCart } from '../../context/ModalCartContext'
+import { useModalWishlist } from '../../context/ModalWishlistContext'
+import { FloatCartMenu } from '../floatCartMenu'
+import { FloatWishlistMenu } from '../floatWishlistMenu'
 import { useEffect } from 'react'
-import { useMovies } from '../context/MoviesContext'
-import { api, api_searchedMovies } from '../services/api'
+import { useMovies } from '../../context/MoviesContext'
+import { api, api_searchedMovies } from '../../services/api'
 
 export function Header() {
   const { handleOpenModalCart } = useModalCart()

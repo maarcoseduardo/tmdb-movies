@@ -4,6 +4,7 @@ export default class MyDocument extends Document {
     return (
       <Html lang='en'>
         <Head>
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" /> 
           <link
             rel='shortcut icon'
             type='image/ico'

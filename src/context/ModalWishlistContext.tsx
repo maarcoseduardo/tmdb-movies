@@ -1,23 +1,7 @@
-import React, { createContext, useState, useContext, ReactNode } from 'react'
+import React, { createContext, useState, useContext } from 'react'
+import { ModalProviderProps, defaultWishlistValues } from '../utils/types'
 
-interface ModalProviderProps {
-  children: ReactNode
-}
-interface ContextValues {
-  openModalWishlist: boolean
-  setOpenModalWishlist: React.Dispatch<React.SetStateAction<boolean>>
-  handleOpenModalWishlist: React.Dispatch<React.SetStateAction<any>>
-  handleCloseModalWishlist: React.Dispatch<React.SetStateAction<any | any>>
-}
-
-const defaultValues: ContextValues = {
-  openModalWishlist: false,
-  setOpenModalWishlist: () => false,
-  handleOpenModalWishlist: () => true,
-  handleCloseModalWishlist: () => false,
-}
-
-const ModalWishlistContext = createContext(defaultValues)
+const ModalWishlistContext = createContext(defaultWishlistValues)
 
 export function ModalWishlistContextProvider({ children }: ModalProviderProps) {
   const [openModalWishlist, setOpenModalWishlist] = useState(false)

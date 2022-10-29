@@ -1,28 +1,14 @@
 import { GetServerSideProps } from 'next'
 import { useEffect } from 'react'
 import { Header } from '../components/header'
-import { useMovies } from '../context/MoviesContext'
-import { api, api_images } from '../services/api'
 import { Movies } from '../components/movies'
+import { useMovies } from '../context/MoviesContext'
+import { api } from '../services/api'
+import { MoviesListPropsTyped } from  "../utils/types"
 
-interface MoviesListProps {
-  id: number
-  genre_ids: number[]
-  title: string
-  release_date: string
-  poster_path: string
-  quantity?: number
-  price?: string
-  inCart?: boolean
-  wishList?: boolean
-}
 
-type MoviesListResponse = {
-  moviesData: MoviesListProps[]
-}
-
-export default function Home({ moviesData }: MoviesListResponse) {
-  const { moviesList, setMoviesList } = useMovies()
+export default function Home({ moviesData }: MoviesListPropsTyped) {
+  const { setMoviesList } = useMovies()
 
   useEffect(() => {
     setMoviesList(moviesData)
@@ -31,7 +17,7 @@ export default function Home({ moviesData }: MoviesListResponse) {
   return (
     <>
       <Header />
-      <Movies moviesData={moviesList} />
+      <Movies />
     </>
   )
 }

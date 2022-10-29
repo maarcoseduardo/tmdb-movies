@@ -1,39 +1,36 @@
 import Modal from 'react-modal'
-import { useModalWishlist } from '../context/ModalWishlistContext'
+import { useModalCart } from '../../context/ModalCartContext'
+import { useMovies } from '../../context/MoviesContext'
 import { FaTrash } from 'react-icons/fa';
-import { ShoppingCart } from 'phosphor-react' 
-import { useMovies } from '../context/MoviesContext';
 
-export function FloatWishlistMenu() {
-  const { openModalWishlist, handleCloseModalWishlist } = useModalWishlist()
-  const { moviesList} = useMovies()
+export function FloatCartMenu() {
+  const { openModalCart, handleCloseModalCart } = useModalCart()
+  const { moviesList } = useMovies()
   return (
     <>
       <Modal
         ariaHideApp={false}
-        isOpen={openModalWishlist}
-        onRequestClose={handleCloseModalWishlist}
+        isOpen={openModalCart}
+        onRequestClose={handleCloseModalCart}
         overlayClassName='react-modal-overlay '
         className='react-modal-content animate-pop-up-menu'
       >
         <section className='flex flex-col gap-3 justify-between h-screen overflow-y-scroll px-4 py-4'>
           <div className='flex flex-col gap-4'>
             <div className='flex justify-between'>
-              <button onClick={handleCloseModalWishlist}>X</button>
-              <h2 className='font-bold'>Meus favoritos</h2>
+              <button onClick={handleCloseModalCart}>X</button>
+              <h2 className='font-bold'>Meu Carrinho</h2>
             </div>
             {moviesList.map((movie) =>
-              movie.wishList ? (
+              movie.inCart ? (
                 <div key={movie.id} className='flex items-center justify-between h-15 '>
                   <div className="flex items-center gap-2 w-32">
                     <img className='w-10 h-10' src={process.env.NEXT_PUBLIC_API_IMAGE + movie.poster_path} alt={movie.title} />
                     <p className="text-xs">{movie.title}</p>
                   </div>
+                  <span className="text-xs">1</span>
                   <span className="text-xs">R$ 79.00</span>
-                  <div className="flex gap-2 w-10">
-                    <button onClick={() => handleAddItemToCart(movie.id)}>
-                      <ShoppingCart size={20} />
-                    </button>
+                  <div>
                     <button>
                       <FaTrash />
                     </button>
@@ -44,12 +41,11 @@ export function FloatWishlistMenu() {
               ),
             )}
           </div>
+          <button className='w-full rounded h-10 text-[#fff] bg-purple-dark-600'>
+            Finalizar compra
+          </button>
         </section>
       </Modal>
     </>
   )
 }
-function handleAddItemToCart(id: any): void {
-  throw new Error('Function not implemented.');
-}
-
