@@ -3,7 +3,7 @@ import { GoStar } from 'react-icons/go'
 import { LazyLoadComponent, LazyLoadImage } from 'react-lazy-load-image-component'
 import { useMovies } from '../../context/MoviesContext'
 export function Cards() {
-  const { moviesList, handleAddItemToCart, handleAddItemToWishList } = useMovies()
+  const { moviesList, handleAddItemToCart, handleToggleItemToWishlist } = useMovies()
 
   return (
     <>
@@ -12,7 +12,7 @@ export function Cards() {
           <li className='mx-auto rounded-lg overflow-hidden cursor-pointer relative animate-scroll-down hover:brightness-90 transition duration-300'>
             <div className='z-[2] absolute h-16 w-full bg-gradient-to-b from-[#000] to-transparent'>
               <button
-                onClick={() => handleAddItemToWishList(movies.id)}
+                onClick={() => handleToggleItemToWishlist(movies.id)}
                 className='absolute top-4 right-4'
               >
                 <HeartStraight size={32} color='red' />

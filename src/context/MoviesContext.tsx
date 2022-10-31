@@ -15,15 +15,27 @@ export function MovieProvider({ children }: MovieProviderProps) {
 
     if(selectedMovie){
       selectedMovie.inCart = true
+      setMoviesList(tempMovies)
     }
   }
 
-  function handleAddItemToWishList(id: number) {
+  function handleToggleItemToWishlist(id: number) {
     const tempMovies = [...moviesList]
     const selectedMovie = tempMovies.find((movie) => movie.id === id)
 
     if(selectedMovie){
-      selectedMovie.wishList = true
+      selectedMovie.wishList = !selectedMovie.wishList
+      setMoviesList(tempMovies)
+    }
+  }
+
+  function handleRemoveItemToCart(id: number){
+    const tempMovies = [...moviesList]
+    const selectedMovie = tempMovies.find((movie) => movie.id === id)
+
+    if(selectedMovie){
+      selectedMovie.inCart = false
+      setMoviesList(tempMovies)
     }
   }
 
@@ -39,7 +51,8 @@ export function MovieProvider({ children }: MovieProviderProps) {
         currentPage,
         setCurrentPage,
         handleAddItemToCart,
-        handleAddItemToWishList
+        handleToggleItemToWishlist,
+        handleRemoveItemToCart
       }}
     >
       {children}
@@ -50,7 +63,7 @@ export function MovieProvider({ children }: MovieProviderProps) {
 export function useMovies() {
   const context = useContext(MoviesContext)
 
-  const { moviesList, setMoviesList, handleAddItemToCart, handleAddItemToWishList, search, setSearch, loadingPage, setLoadingPage, currentPage, setCurrentPage } = context
+  const { moviesList, setMoviesList, handleAddItemToCart, handleToggleItemToWishlist, search, setSearch, loadingPage, setLoadingPage, currentPage, setCurrentPage, handleRemoveItemToCart } = context
 
-  return { moviesList, setMoviesList, handleAddItemToCart, handleAddItemToWishList, search, setSearch, loadingPage, setLoadingPage, currentPage, setCurrentPage }
+  return { moviesList, setMoviesList, handleAddItemToCart, handleToggleItemToWishlist, search, setSearch, loadingPage, setLoadingPage, currentPage, setCurrentPage, handleRemoveItemToCart }
 }
