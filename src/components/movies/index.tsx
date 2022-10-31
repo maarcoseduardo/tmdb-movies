@@ -18,6 +18,7 @@ export function Movies() {
 
   async function newMovies() {
     if (!search) {
+      setCurrentPage(2)
       const responseNewMovies = await api.get(
         `popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=${currentPage}`,
       )

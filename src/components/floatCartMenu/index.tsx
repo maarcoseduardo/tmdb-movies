@@ -5,7 +5,7 @@ import { FaTrash } from 'react-icons/fa';
 
 export function FloatCartMenu() {
   const { openModalCart, handleCloseModalCart } = useModalCart()
-  const { moviesList } = useMovies()
+  const { moviesList, handleRemoveItemToCart } = useMovies()
   return (
     <>
       <Modal
@@ -31,7 +31,7 @@ export function FloatCartMenu() {
                   <span className="text-xs">1</span>
                   <span className="text-xs">R$ 79.00</span>
                   <div>
-                    <button>
+                    <button onClick={() => handleRemoveItemToCart(movie.id)}>
                       <FaTrash />
                     </button>
                   </div>

@@ -6,7 +6,7 @@ import { useMovies } from '../../context/MoviesContext';
 
 export function FloatWishlistMenu() {
   const { openModalWishlist, handleCloseModalWishlist } = useModalWishlist()
-  const { moviesList} = useMovies()
+  const { moviesList, handleAddItemToCart, handleToggleItemToWishlist} = useMovies()
   return (
     <>
       <Modal
@@ -34,7 +34,7 @@ export function FloatWishlistMenu() {
                     <button onClick={() => handleAddItemToCart(movie.id)}>
                       <ShoppingCart size={20} />
                     </button>
-                    <button>
+                    <button onClick={() => handleToggleItemToWishlist(movie.id)}>
                       <FaTrash />
                     </button>
                   </div>
@@ -48,8 +48,5 @@ export function FloatWishlistMenu() {
       </Modal>
     </>
   )
-}
-function handleAddItemToCart(id: any): void {
-  throw new Error('Function not implemented.');
 }
 
