@@ -87,3 +87,19 @@ export const defaultWishlistValues: IWishlistContextDefaultValues = {
   handleOpenModalWishlist: () => true,
   handleCloseModalWishlist: () => false,
 }
+
+//InCart
+
+interface IDefaultMovieCartContextValues {
+  moviesInCart: IMovieslist[]
+  setMoviesInCart: React.Dispatch<React.SetStateAction<IMovieslist[]>>
+  handleAddItemToCart: (movie: IMovieslist) => void
+  handleRemoveItemToCart: (movie: IMovieslist) => void
+}
+
+export const defaultMovieCartContextValues: IDefaultMovieCartContextValues = {
+  moviesInCart: [],
+  setMoviesInCart: () => [],
+  handleAddItemToCart: (movie: IMovieslist) => {},
+  handleRemoveItemToCart: (movie: IMovieslist) => {}
+}

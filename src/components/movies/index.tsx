@@ -52,7 +52,7 @@ export function Movies() {
           loader={<p>loading...</p>}
           className='max-w-7xl w-full py-32 px-4 mx-auto grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
         >
-            <Cards />
+          <Cards />
         </InfiniteScroll>
       </ul>
     </section>

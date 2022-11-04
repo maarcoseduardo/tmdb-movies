@@ -2,9 +2,10 @@ import { HeartStraight } from 'phosphor-react'
 import { GoStar } from 'react-icons/go'
 import { LazyLoadComponent, LazyLoadImage } from 'react-lazy-load-image-component'
 import { useMovies } from '../../context/MoviesContext'
+import { useMoviesInCart } from '../../context/MoviesInCart'
 export function Cards() {
-  const { moviesList, handleAddItemToCart, handleToggleItemToWishlist } = useMovies()
-
+  const { moviesList, handleToggleItemToWishlist } = useMovies()
+  const { handleAddItemToCart } = useMoviesInCart()
   return (
     <>
       {moviesList.map((movies) => (
@@ -38,12 +39,21 @@ export function Cards() {
                 <p>Gênero</p>
               </div>
               <span className=' font-bold'>R$ 79,99</span>
-              <button
-                onClick={() => handleAddItemToCart(movies.id)}
-                className='w-full rounded-b-md h-10 text-[#fff] bg-purple-dark-600'
-              >
-                Adicionar
-              </button>
+              {!movies.inCart ? (
+                <button
+                  onClick={() => handleAddItemToCart(movies)}
+                  className='w-full rounded-b-md h-10 text-[#fff] bg-purple-dark-600'
+                >
+                  Adicionar
+                </button>
+              ) : (
+                <div className="flex justify-between items-center px-2 w-full border-2 border-solid rounded h-10 border-purple-dark-600">
+                  <button>-</button>
+                  <div>1</div>
+                  <button>+</button>
+                </div>
+              )}
+
             </div>
           </li>
         </LazyLoadComponent>
