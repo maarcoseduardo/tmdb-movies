@@ -5,7 +5,8 @@ export const MoviesInCartContext = createContext(defaultMovieCartContextValues)
 
 export function MovieInCartProvider({ children }: MovieProviderProps) {
   const [moviesInCart, setMoviesInCart] = useState<IMovieslist[]>([])
-
+  const [moviesQuantityInCart, setMoviesQuantityInCart] = useState(0);
+  
   function handleAddItemToCart(movie: IMovieslist) {
     const tempMovies = [...moviesInCart]
     const selectedMovies = tempMovies.find(movieInArray => movieInArray.id === movie.id)
@@ -21,6 +22,11 @@ export function MovieInCartProvider({ children }: MovieProviderProps) {
     movie.inCart = false
     setMoviesInCart(selectedMovies)
   }
+
+  // function handleIncrementQuantityOnMovies(){
+  
+    
+  // }
 
   return (
     <MoviesInCartContext.Provider

@@ -3,6 +3,7 @@ import { GoStar } from 'react-icons/go'
 import { LazyLoadComponent, LazyLoadImage } from 'react-lazy-load-image-component'
 import { useMovies } from '../../context/MoviesContext'
 import { useMoviesInCart } from '../../context/MoviesInCart'
+
 export function Cards() {
   const { moviesList, handleToggleItemToWishlist } = useMovies()
   const { handleAddItemToCart } = useMoviesInCart()

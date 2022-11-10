@@ -31,9 +31,7 @@ interface IDefaultMovieContextValues {
   setLoadingPage: React.Dispatch<React.SetStateAction<boolean>>
   currentPage: number
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>
-  handleAddItemToCart: (id: number) => void
   handleToggleItemToWishlist: (id: number) => void
-  handleRemoveItemToCart: (id: number) => void
 }
 
 export const defaultMovieContextValues: IDefaultMovieContextValues = {
@@ -45,9 +43,7 @@ export const defaultMovieContextValues: IDefaultMovieContextValues = {
   setLoadingPage: () => false,
   currentPage: 2,
   setCurrentPage: () => {},
-  handleAddItemToCart: (id: number) => {},
   handleToggleItemToWishlist: (id: number) => {},
-  handleRemoveItemToCart: (id: number) => {}
 }
 
 // Context ModalCartMenuContext

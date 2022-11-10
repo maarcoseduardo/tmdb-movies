@@ -3,10 +3,12 @@ import { useModalWishlist } from '../../context/ModalWishlistContext'
 import { FaTrash } from 'react-icons/fa';
 import { ShoppingCart } from 'phosphor-react' 
 import { useMovies } from '../../context/MoviesContext';
+import { useMoviesInCart } from '../../context/MoviesInCart';
 
 export function FloatWishlistMenu() {
   const { openModalWishlist, handleCloseModalWishlist } = useModalWishlist()
-  const { moviesList, handleAddItemToCart, handleToggleItemToWishlist} = useMovies()
+  const { moviesList, handleToggleItemToWishlist} = useMovies()
+  const { handleAddItemToCart } = useMoviesInCart()
   return (
     <>
       <Modal
@@ -31,7 +33,7 @@ export function FloatWishlistMenu() {
                   </div>
                   <span className="text-xs">R$ 79.00</span>
                   <div className="flex gap-2 w-10">
-                    <button onClick={() => handleAddItemToCart(movie.id)}>
+                    <button onClick={() => handleAddItemToCart(movie)}>
                       <ShoppingCart size={20} />
                     </button>
                     <button onClick={() => handleToggleItemToWishlist(movie.id)}>
