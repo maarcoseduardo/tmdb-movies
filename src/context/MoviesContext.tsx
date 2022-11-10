@@ -9,15 +9,6 @@ export function MovieProvider({ children }: MovieProviderProps) {
   const [currentPage, setCurrentPage] = useState(2)
   const [loadingPage, setLoadingPage] = useState(false);
 
-  function handleAddItemToCart(id: number) {
-    const tempMovies = [...moviesList]
-    const selectedMovie = tempMovies.find((movie) => movie.id === id)
-
-    if(selectedMovie){
-      selectedMovie.inCart = true
-      setMoviesList(tempMovies)
-    }
-  }
 
   function handleToggleItemToWishlist(id: number) {
     const tempMovies = [...moviesList]
@@ -25,16 +16,6 @@ export function MovieProvider({ children }: MovieProviderProps) {
 
     if(selectedMovie){
       selectedMovie.wishList = !selectedMovie.wishList
-      setMoviesList(tempMovies)
-    }
-  }
-
-  function handleRemoveItemToCart(id: number){
-    const tempMovies = [...moviesList]
-    const selectedMovie = tempMovies.find((movie) => movie.id === id)
-
-    if(selectedMovie){
-      selectedMovie.inCart = false
       setMoviesList(tempMovies)
     }
   }
@@ -50,9 +31,7 @@ export function MovieProvider({ children }: MovieProviderProps) {
         setLoadingPage,
         currentPage,
         setCurrentPage,
-        handleAddItemToCart,
         handleToggleItemToWishlist,
-        handleRemoveItemToCart
       }}
     >
       {children}
@@ -63,7 +42,7 @@ export function MovieProvider({ children }: MovieProviderProps) {
 export function useMovies() {
   const context = useContext(MoviesContext)
 
-  const { moviesList, setMoviesList, handleAddItemToCart, handleToggleItemToWishlist, search, setSearch, loadingPage, setLoadingPage, currentPage, setCurrentPage, handleRemoveItemToCart } = context
+  const { moviesList, setMoviesList, handleToggleItemToWishlist, search, setSearch, loadingPage, setLoadingPage, currentPage, setCurrentPage } = context
 
-  return { moviesList, setMoviesList, handleAddItemToCart, handleToggleItemToWishlist, search, setSearch, loadingPage, setLoadingPage, currentPage, setCurrentPage, handleRemoveItemToCart }
+  return { moviesList, setMoviesList, handleToggleItemToWishlist, search, setSearch, loadingPage, setLoadingPage, currentPage, setCurrentPage }
 }
