@@ -91,11 +91,13 @@ interface IDefaultMovieCartContextValues {
   setMoviesInCart: React.Dispatch<React.SetStateAction<IMovieslist[]>>
   handleAddItemToCart: (movie: IMovieslist) => void
   handleRemoveItemToCart: (movie: IMovieslist) => void
+  handleIncrementQuantityOnMovies: (movie: IMovieslist) => void
 }
 
 export const defaultMovieCartContextValues: IDefaultMovieCartContextValues = {
   moviesInCart: [],
   setMoviesInCart: () => [],
   handleAddItemToCart: (movie: IMovieslist) => {},
-  handleRemoveItemToCart: (movie: IMovieslist) => {}
+  handleRemoveItemToCart: (movie: IMovieslist) => {},
+  handleIncrementQuantityOnMovies: (movie: IMovieslist) => {}
 }
