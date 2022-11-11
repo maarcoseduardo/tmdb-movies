@@ -5,14 +5,17 @@ export const MoviesInCartContext = createContext(defaultMovieCartContextValues)
 
 export function MovieInCartProvider({ children }: MovieProviderProps) {
   const [moviesInCart, setMoviesInCart] = useState<IMovieslist[]>([])
-  const [moviesQuantityInCart, setMoviesQuantityInCart] = useState(0);
+  const [moviesQuantityInCart, setMoviesQuantityInCart] = useState(1);
   
   function handleAddItemToCart(movie: IMovieslist) {
     const tempMovies = [...moviesInCart]
     const selectedMovies = tempMovies.find(movieInArray => movieInArray.id === movie.id)
     
-    movie.inCart = true
-    setMoviesInCart([...tempMovies, movie])
+    //if not in cart, add!
+    if(!movie.inCart){
+      movie.inCart = true
+      setMoviesInCart([...tempMovies, movie])
+    } 
   }
 
   function handleRemoveItemToCart(movie: IMovieslist){
@@ -23,10 +26,15 @@ export function MovieInCartProvider({ children }: MovieProviderProps) {
     setMoviesInCart(selectedMovies)
   }
 
-  // function handleIncrementQuantityOnMovies(){
-  
+  function handleIncrementQuantityOnMovies(movie: IMovieslist){
+    const tempMovies = [...moviesInCart]
+    const selectedMovies = tempMovies.find(movieInArray => movieInArray === movie)
     
-  // }
+    // const index = tempMovies.indexOf(selectedMovies)
+
+    // setMoviesInCart(tempMovies)
+    
+  }
 
   return (
     <MoviesInCartContext.Provider
@@ -34,7 +42,8 @@ export function MovieInCartProvider({ children }: MovieProviderProps) {
         moviesInCart,
         setMoviesInCart,
         handleAddItemToCart,
-        handleRemoveItemToCart
+        handleRemoveItemToCart,
+        handleIncrementQuantityOnMovies
       }}
     >
       {children}
@@ -45,7 +54,7 @@ export function MovieInCartProvider({ children }: MovieProviderProps) {
 export function useMoviesInCart() {
   const context = useContext(MoviesInCartContext)
 
-  const { moviesInCart, setMoviesInCart, handleAddItemToCart, handleRemoveItemToCart } = context
+  const { moviesInCart, setMoviesInCart, handleAddItemToCart, handleRemoveItemToCart, handleIncrementQuantityOnMovies } = context
 
-  return { moviesInCart, setMoviesInCart, handleAddItemToCart, handleRemoveItemToCart }
+  return { moviesInCart, setMoviesInCart, handleAddItemToCart, handleRemoveItemToCart, handleIncrementQuantityOnMovies }
 }
