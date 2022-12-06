@@ -30,22 +30,22 @@ export function MovieInCartProvider({ children }: MovieProviderProps) {
     const tempMovies = [...moviesInCart]
     const selectedMovies = tempMovies.filter(movieInArray => movieInArray === movie)
 
-    // selectedMovies[0].quantity += 1
+    selectedMovies[0].quantity += 1
 
-    // setMoviesInCart(tempMovies)
+    setMoviesInCart(tempMovies)
   }
-  
+
   function handleDecrementQuantityOnMovies(movie: IMovieslist) {
     const tempMovies = [...moviesInCart]
     const selectedMovies = tempMovies.filter(movieInArray => movieInArray === movie)
 
-    // selectedMovies[0].quantity -= 1
+    selectedMovies[0].quantity -= 1
 
-    // if (!selectedMovies[0].quantity <= 0) {
-    //   setMoviesInCart(tempMovies)
-    // } else {
-    //   handleRemoveItemToCart(selectedMovies[0])
-    // }
+    if (selectedMovies[0].quantity <= 0) {
+      handleRemoveItemToCart(selectedMovies[0])
+    } else {
+      setMoviesInCart(tempMovies)
+    }
   }
 
   return (

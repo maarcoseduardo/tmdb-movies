@@ -7,7 +7,7 @@ export interface IMovieslist {
   title: string
   release_date: string
   poster_path: string
-  quantity?: number
+  quantity: number
   price?: number
   inCart?: boolean
   wishList?: boolean
@@ -102,7 +102,7 @@ export const defaultMovieCartContextValues: IDefaultMovieCartContextValues = {
     title: '',
     release_date: '',
     poster_path: '',
-    quantity:0,
+    quantity: 1,
     price: 0,
     inCart: false,
     wishList: false
