@@ -6,19 +6,19 @@ export const MoviesInCartContext = createContext(defaultMovieCartContextValues)
 export function MovieInCartProvider({ children }: MovieProviderProps) {
   const [moviesInCart, setMoviesInCart] = useState<IMovieslist[]>([])
   const [moviesQuantityInCart, setMoviesQuantityInCart] = useState(1);
-  
+
   function handleAddItemToCart(movie: IMovieslist) {
     const tempMovies = [...moviesInCart]
     const selectedMovies = tempMovies.find(movieInArray => movieInArray.id === movie.id)
-    
-    //if not in cart, add!
-    if(!movie.inCart){
+
+    if (!movie.inCart) {
       movie.inCart = true
+      movie.quantity = 1;
       setMoviesInCart([...tempMovies, movie])
-    } 
+    }
   }
 
-  function handleRemoveItemToCart(movie: IMovieslist){
+  function handleRemoveItemToCart(movie: IMovieslist) {
     const tempMovies = [...moviesInCart]
     const selectedMovies = tempMovies.filter((movieInArray) => movieInArray !== movie)
 
@@ -26,14 +26,26 @@ export function MovieInCartProvider({ children }: MovieProviderProps) {
     setMoviesInCart(selectedMovies)
   }
 
-  function handleIncrementQuantityOnMovies(movie: IMovieslist){
+  function handleIncrementQuantityOnMovies(movie: IMovieslist) {
     const tempMovies = [...moviesInCart]
-    const selectedMovies = tempMovies.find(movieInArray => movieInArray === movie)
-    
-    // const index = tempMovies.indexOf(selectedMovies)
+    const selectedMovies = tempMovies.filter(movieInArray => movieInArray === movie)
 
-    // setMoviesInCart(tempMovies)
-    
+    selectedMovies[0].quantity += 1
+
+    setMoviesInCart(tempMovies)
+  }
+  
+  function handleDecrementQuantityOnMovies(movie: IMovieslist) {
+    const tempMovies = [...moviesInCart]
+    const selectedMovies = tempMovies.filter(movieInArray => movieInArray === movie)
+
+    selectedMovies[0].quantity -= 1
+
+    if (!selectedMovies[0].quantity <= 0) {
+      setMoviesInCart(tempMovies)
+    } else {
+      handleRemoveItemToCart(selectedMovies[0])
+    }
   }
 
   return (
@@ -43,7 +55,8 @@ export function MovieInCartProvider({ children }: MovieProviderProps) {
         setMoviesInCart,
         handleAddItemToCart,
         handleRemoveItemToCart,
-        handleIncrementQuantityOnMovies
+        handleIncrementQuantityOnMovies,
+        handleDecrementQuantityOnMovies
       }}
     >
       {children}
@@ -54,7 +67,7 @@ export function MovieInCartProvider({ children }: MovieProviderProps) {
 export function useMoviesInCart() {
   const context = useContext(MoviesInCartContext)
 
-  const { moviesInCart, setMoviesInCart, handleAddItemToCart, handleRemoveItemToCart, handleIncrementQuantityOnMovies } = context
+  const { moviesInCart, setMoviesInCart, handleAddItemToCart, handleRemoveItemToCart, handleIncrementQuantityOnMovies, handleDecrementQuantityOnMovies } = context
 
-  return { moviesInCart, setMoviesInCart, handleAddItemToCart, handleRemoveItemToCart, handleIncrementQuantityOnMovies }
+  return { moviesInCart, setMoviesInCart, handleAddItemToCart, handleRemoveItemToCart, handleIncrementQuantityOnMovies, handleDecrementQuantityOnMovies }
 }
