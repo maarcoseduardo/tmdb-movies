@@ -1,5 +1,9 @@
 import React, { createContext, useState, useContext } from 'react'
-import { IMovieslist, MovieProviderProps, defaultMovieCartContextValues } from '../utils/types'
+import {
+  IMovieslist,
+  MovieProviderProps,
+  defaultMovieCartContextValues,
+} from '../utils/types'
 
 export const MoviesInCartContext = createContext(defaultMovieCartContextValues)
 
@@ -8,18 +12,22 @@ export function MovieInCartProvider({ children }: MovieProviderProps) {
 
   function handleAddItemToCart(movie: IMovieslist) {
     const tempMovies = [...moviesInCart]
-    const selectedMovies = tempMovies.find(movieInArray => movieInArray.id === movie.id)
+    const selectedMovies = tempMovies.find(
+      (movieInArray) => movieInArray.id === movie.id,
+    )
 
     if (!movie.inCart) {
       movie.inCart = true
-      movie.quantity = 1;
+      movie.quantity = 1
       setMoviesInCart([...tempMovies, movie])
     }
   }
 
   function handleRemoveItemToCart(movie: IMovieslist) {
     const tempMovies = [...moviesInCart]
-    const selectedMovies = tempMovies.filter((movieInArray) => movieInArray !== movie)
+    const selectedMovies = tempMovies.filter(
+      (movieInArray) => movieInArray !== movie,
+    )
 
     movie.inCart = false
     setMoviesInCart(selectedMovies)
@@ -27,7 +35,9 @@ export function MovieInCartProvider({ children }: MovieProviderProps) {
 
   function handleIncrementQuantityOnMovies(movie: IMovieslist) {
     const tempMovies = [...moviesInCart]
-    const selectedMovies = tempMovies.filter(movieInArray => movieInArray === movie)
+    const selectedMovies = tempMovies.filter(
+      (movieInArray) => movieInArray === movie,
+    )
 
     selectedMovies[0].quantity += 1
 
@@ -36,7 +46,9 @@ export function MovieInCartProvider({ children }: MovieProviderProps) {
 
   function handleDecrementQuantityOnMovies(movie: IMovieslist) {
     const tempMovies = [...moviesInCart]
-    const selectedMovies = tempMovies.filter(movieInArray => movieInArray === movie)
+    const selectedMovies = tempMovies.filter(
+      (movieInArray) => movieInArray === movie,
+    )
 
     selectedMovies[0].quantity -= 1
 
@@ -55,7 +67,7 @@ export function MovieInCartProvider({ children }: MovieProviderProps) {
         handleAddItemToCart,
         handleRemoveItemToCart,
         handleIncrementQuantityOnMovies,
-        handleDecrementQuantityOnMovies
+        handleDecrementQuantityOnMovies,
       }}
     >
       {children}
@@ -66,7 +78,21 @@ export function MovieInCartProvider({ children }: MovieProviderProps) {
 export function useMoviesInCart() {
   const context = useContext(MoviesInCartContext)
 
-  const { moviesInCart, setMoviesInCart, handleAddItemToCart, handleRemoveItemToCart, handleIncrementQuantityOnMovies, handleDecrementQuantityOnMovies } = context
+  const {
+    moviesInCart,
+    setMoviesInCart,
+    handleAddItemToCart,
+    handleRemoveItemToCart,
+    handleIncrementQuantityOnMovies,
+    handleDecrementQuantityOnMovies,
+  } = context
 
-  return { moviesInCart, setMoviesInCart, handleAddItemToCart, handleRemoveItemToCart, handleIncrementQuantityOnMovies, handleDecrementQuantityOnMovies }
+  return {
+    moviesInCart,
+    setMoviesInCart,
+    handleAddItemToCart,
+    handleRemoveItemToCart,
+    handleIncrementQuantityOnMovies,
+    handleDecrementQuantityOnMovies,
+  }
 }
