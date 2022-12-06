@@ -96,3 +96,8 @@ export function useMoviesInCart() {
     handleDecrementQuantityOnMovies,
   }
 }
+=======
+  const { moviesInCart, setMoviesInCart, handleAddItemToCart, handleRemoveItemToCart, handleIncrementQuantityOnMovies, handleDecrementQuantityOnMovies } = context
+
+  return { moviesInCart, setMoviesInCart, handleAddItemToCart, handleRemoveItemToCart, handleIncrementQuantityOnMovies, handleDecrementQuantityOnMovies }
+}
