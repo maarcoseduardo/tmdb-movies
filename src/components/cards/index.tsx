@@ -6,7 +6,7 @@ import { useMoviesInCart } from '../../context/MoviesInCart'
 
 export function Cards() {
   const { moviesList, handleToggleItemToWishlist } = useMovies()
-  const { handleAddItemToCart, handleIncrementQuantityOnMovies, handleDecrementQuantityOnMovies } = useMoviesInCart()
+  const { handleAddItemToCart, handleIncrementQuantityOnMovies } = useMoviesInCart()
   return (
     <>
       {moviesList.map((movies) => (
@@ -49,8 +49,8 @@ export function Cards() {
                 </button>
               ) : (
                 <div className="flex justify-between items-center px-2 w-full border-2 border-solid rounded h-10 border-purple-dark-600">
-                  <button onClick={() => handleDecrementQuantityOnMovies(movies)}>-</button>
-                  <div>{movies.quantity}</div>
+                  <button>-</button>
+                  <div>1</div>
                   <button onClick={() => handleIncrementQuantityOnMovies(movies)}>+</button>
                 </div>
               )}
