@@ -5,7 +5,6 @@ export const MoviesInCartContext = createContext(defaultMovieCartContextValues)
 
 export function MovieInCartProvider({ children }: MovieProviderProps) {
   const [moviesInCart, setMoviesInCart] = useState<IMovieslist[]>([])
-  const [moviesQuantityInCart, setMoviesQuantityInCart] = useState(1);
 
   function handleAddItemToCart(movie: IMovieslist) {
     const tempMovies = [...moviesInCart]
