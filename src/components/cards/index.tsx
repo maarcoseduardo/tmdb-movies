@@ -21,6 +21,7 @@ export function Cards() {
               </button>
             </div>
             <LazyLoadImage
+              className="h-[460px]"
               src={process.env.NEXT_PUBLIC_API_IMAGE + movies.poster_path}
               alt={movies.title}
               effect='blur'
@@ -54,7 +55,6 @@ export function Cards() {
                   <button onClick={() => handleIncrementQuantityOnMovies(movies)}>+</button>
                 </div>
               )}
-
             </div>
           </li>
         </LazyLoadComponent>

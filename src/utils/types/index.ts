@@ -7,8 +7,8 @@ export interface IMovieslist {
   title: string
   release_date: string
   poster_path: string
-  quantity?: number
-  price?: string
+  quantity: number
+  price?: number
   inCart?: boolean
   wishList?: boolean
 }
@@ -87,17 +87,29 @@ export const defaultWishlistValues: IWishlistContextDefaultValues = {
 //InCart
 
 interface IDefaultMovieCartContextValues {
-  moviesInCart: IMovieslist[]
+  moviesInCart: IMovieslist[];
   setMoviesInCart: React.Dispatch<React.SetStateAction<IMovieslist[]>>
   handleAddItemToCart: (movie: IMovieslist) => void
   handleRemoveItemToCart: (movie: IMovieslist) => void
   handleIncrementQuantityOnMovies: (movie: IMovieslist) => void
+  handleDecrementQuantityOnMovies: (movie: IMovieslist) => void
 }
 
 export const defaultMovieCartContextValues: IDefaultMovieCartContextValues = {
-  moviesInCart: [],
+  moviesInCart: [{
+    id:0,
+    genre_ids: [0,0],
+    title: '',
+    release_date: '',
+    poster_path: '',
+    quantity: 1,
+    price: 0,
+    inCart: false,
+    wishList: false
+  }],
   setMoviesInCart: () => [],
   handleAddItemToCart: (movie: IMovieslist) => {},
   handleRemoveItemToCart: (movie: IMovieslist) => {},
-  handleIncrementQuantityOnMovies: (movie: IMovieslist) => {}
+  handleIncrementQuantityOnMovies: (movie: IMovieslist) => {},
+  handleDecrementQuantityOnMovies: (movie: IMovieslist) => {}
 }
