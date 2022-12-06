@@ -39,7 +39,7 @@ export function FloatCartMenu() {
             )}
           </div>
           <button className='w-full rounded h-10 text-[#fff] bg-purple-dark-600'>
-            Finalizar compra
+            Finalizar compra 
           </button>
         </section>
       </Modal>
