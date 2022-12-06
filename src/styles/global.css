@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
+.react-modal-overlay {
+    display: flex;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    bottom:0;
+    right: 0;
+    left: 0;
+    background:rgba(0,0,0, 0.5);
+  }
+  
+  .react-modal-content {
+    max-width: 400px;
+    width:100%;
+    background: #e4e4e7;
+    margin:0 0 0 auto;
+  }
