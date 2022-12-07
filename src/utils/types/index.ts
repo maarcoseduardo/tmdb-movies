@@ -3,7 +3,7 @@ import { ReactNode } from "react"
 //Home 
 export interface IMovieslist {
   id: number
-  genre_ids: number[]
+  genre_ids: number
   title: string
   release_date: string
   poster_path: string
@@ -98,7 +98,7 @@ interface IDefaultMovieCartContextValues {
 export const defaultMovieCartContextValues: IDefaultMovieCartContextValues = {
   moviesInCart: [{
     id:0,
-    genre_ids: [0,0],
+    genre_ids: 0,
     title: '',
     release_date: '',
     poster_path: '',
@@ -112,4 +112,10 @@ export const defaultMovieCartContextValues: IDefaultMovieCartContextValues = {
   handleRemoveItemToCart: (movie: IMovieslist) => {},
   handleIncrementQuantityOnMovies: (movie: IMovieslist) => {},
   handleDecrementQuantityOnMovies: (movie: IMovieslist) => {}
+}
+
+
+export interface IGenres {
+  id: number,
+  name: string,
 }

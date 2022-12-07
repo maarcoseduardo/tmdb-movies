@@ -1,12 +1,29 @@
+import axios from 'axios'
 import { HeartStraight } from 'phosphor-react'
+import { useEffect, useState } from 'react'
 import { GoStar } from 'react-icons/go'
 import { LazyLoadComponent, LazyLoadImage } from 'react-lazy-load-image-component'
 import { useMovies } from '../../context/MoviesContext'
 import { useMoviesInCart } from '../../context/MoviesInCart'
+import { IGenres } from '../../utils/types'
 
 export function Cards() {
   const { moviesList, handleToggleItemToWishlist } = useMovies()
   const { handleAddItemToCart, handleIncrementQuantityOnMovies, handleDecrementQuantityOnMovies } = useMoviesInCart()
+  const [genres, setGenres] = useState<IGenres[]>([]);
+  
+
+  async function getGenre(){
+    const getListGenre = await axios.get(`${process.env.NEXT_PUBLIC_API_GENRE}list?api_key=${process.env.NEXT_PUBLIC_API_KEY}`)
+    const responseGenre = await getListGenre.data.genres
+    setGenres(responseGenre)
+  }
+
+  useEffect(() => {
+    getGenre()
+  },[])
+
+
   return (
     <>
       {moviesList.map((movies) => (
@@ -38,7 +55,9 @@ export function Cards() {
                 <span>
                   <GoStar size={21} />
                 </span>
-                <p>Gênero</p>
+                <span>
+                  Gênero
+                </span> {/* add api genre documentation*/}
               </div>
               <span className=' font-bold'>R$ 79,99</span>
               {!movies.inCart ? (
