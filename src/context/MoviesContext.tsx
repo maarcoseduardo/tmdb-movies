@@ -9,7 +9,6 @@ export function MovieProvider({ children }: MovieProviderProps) {
   const [currentPage, setCurrentPage] = useState(2)
   const [loadingPage, setLoadingPage] = useState(false);
 
-
   function handleToggleItemToWishlist(id: number) {
     const tempMovies = [...moviesList]
     const selectedMovie = tempMovies.find((movie) => movie.id === id)

@@ -13,7 +13,6 @@ export function Movies() {
     currentPage,
     setCurrentPage,
   } = useMovies()
-  
   const [hasMore, setHasMore] = useState(true)
 
   async function newMovies() {
