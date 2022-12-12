@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext } from 'react'
-import { IMovieslist, MovieProviderProps, defaultMovieContextValues } from '../utils/types'
+import { IMovieslist, MovieProviderProps, defaultMovieContextValues, IGenres } from '../utils/types'
 
 export const MoviesContext = createContext(defaultMovieContextValues)
 
@@ -8,6 +8,7 @@ export function MovieProvider({ children }: MovieProviderProps) {
   const [search, setSearch] = useState('');
   const [currentPage, setCurrentPage] = useState(2)
   const [loadingPage, setLoadingPage] = useState(false);
+  const [genres, setGenres] = useState<IGenres[]>([]);
 
   function handleToggleItemToWishlist(id: number) {
     const tempMovies = [...moviesList]
@@ -24,6 +25,8 @@ export function MovieProvider({ children }: MovieProviderProps) {
       value={{
         moviesList,
         setMoviesList,
+        genres, 
+        setGenres,
         search,
         setSearch,
         loadingPage,
@@ -41,7 +44,7 @@ export function MovieProvider({ children }: MovieProviderProps) {
 export function useMovies() {
   const context = useContext(MoviesContext)
 
-  const { moviesList, setMoviesList, handleToggleItemToWishlist, search, setSearch, loadingPage, setLoadingPage, currentPage, setCurrentPage } = context
+  const { moviesList, setMoviesList, handleToggleItemToWishlist, search, setSearch, loadingPage, setLoadingPage, currentPage, setCurrentPage, genres, setGenres } = context
 
-  return { moviesList, setMoviesList, handleToggleItemToWishlist, search, setSearch, loadingPage, setLoadingPage, currentPage, setCurrentPage }
+  return { moviesList, setMoviesList, handleToggleItemToWishlist, search, setSearch, loadingPage, setLoadingPage, currentPage, setCurrentPage, genres, setGenres }
 }

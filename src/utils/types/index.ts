@@ -9,12 +9,14 @@ export interface IMovieslist {
   poster_path: string
   quantity: number
   price?: number
+  vote_average: number
   inCart?: boolean
   wishList?: boolean
 }
 
 export type MoviesListPropsTyped = {
-  moviesData: IMovieslist[]
+  moviesData: IMovieslist[];
+  moviesGenreData: IGenres[];
 }
 
 //Context useMovies
@@ -25,6 +27,8 @@ export interface MovieProviderProps {
 interface IDefaultMovieContextValues {
   moviesList: IMovieslist[]
   setMoviesList: React.Dispatch<React.SetStateAction<IMovieslist[]>>
+  genres: IGenres[]
+  setGenres: React.Dispatch<React.SetStateAction<IGenres[]>>
   search: string
   setSearch: React.Dispatch<React.SetStateAction<string>>
   loadingPage: boolean,
@@ -37,6 +41,8 @@ interface IDefaultMovieContextValues {
 export const defaultMovieContextValues: IDefaultMovieContextValues = {
   moviesList: [],
   setMoviesList: () => [],
+  genres: [],
+  setGenres: () => [],
   search: '',
   setSearch: () => '',
   loadingPage: false,
@@ -104,6 +110,7 @@ export const defaultMovieCartContextValues: IDefaultMovieCartContextValues = {
     poster_path: '',
     quantity: 1,
     price: 0,
+    vote_average: 0.0,
     inCart: false,
     wishList: false
   }],

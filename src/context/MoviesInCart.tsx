@@ -4,18 +4,19 @@ import {
   MovieProviderProps,
   defaultMovieCartContextValues,
 } from '../utils/types'
+import { getPrice, formatPrice } from "../utils/fn"
 
 export const MoviesInCartContext = createContext(defaultMovieCartContextValues)
 
 export function MovieInCartProvider({ children }: MovieProviderProps) {
   const [moviesInCart, setMoviesInCart] = useState<IMovieslist[]>([])
   const [total, setTotal] = useState(0);
+ 
 
   function handleAddItemToCart(movie: IMovieslist) {
     const tempMovies = [...moviesInCart]
-    const selectedMovies = tempMovies.find(
-      (movieInArray) => movieInArray.id === movie.id,
-    )
+    const selectedMovies = tempMovies.find((movieInArray) => movieInArray == movie)
+    
 
     if (!movie.inCart) {
       movie.inCart = true
