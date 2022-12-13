@@ -29,7 +29,7 @@ export function FloatCartMenu() {
                   <p className="text-xs">{movie.title}</p>
                 </div>
                 <span className="text-xs">{movie.quantity}</span>
-                <span className="text-xs">R$ 79.00</span>
+                <span className="text-xs">R$ {movie.price}</span>
                 <div>
                   <button onClick={() => handleRemoveItemToCart(movie)}>
                     <FaTrash />
