@@ -42,15 +42,6 @@ export function MovieInCartProvider({ children }: MovieProviderProps) {
     const tempMovies = [...moviesInCart]
     const selectedMovies = tempMovies.filter((movieInArray) => movieInArray === movie)
 
-    selectedMovies[0].quantity += 1
-    selectedMovies[0].total = selectedMovies[0].quantity * selectedMovies[0].price
-    setMoviesInCart(tempMovies)
-
-    const selectedMovieTotal = tempMovies.map((movies) => movies.total)
-    sumMoviesReduce = selectedMovieTotal.reduce((sum: any, count: any) => sum + count, 0)
-    console.log(sumMoviesReduce);
-
-    setPriceTotalOfMovies(sumMoviesReduce)
 
   }
 
