@@ -18,13 +18,12 @@ export function MovieInCartProvider({ children }: MovieProviderProps) {
 
     if (!movie.inCart) {
       const price = getPrice(movie.vote_average)
-      
+
       movie.inCart = true
       movie.quantity = 1
       movie.price = price
       movie.total = movie.price
       setMoviesInCart([...tempMovies, movie])
-      
     }
   }
 
@@ -47,8 +46,8 @@ export function MovieInCartProvider({ children }: MovieProviderProps) {
     selectedMovies[0].total = selectedMovies[0].quantity * selectedMovies[0].price
     setMoviesInCart(tempMovies)
 
-    const selectedMoviesTotal = tempMovies.map( movies => movies.total )
-    sumMoviesReduce = selectedMoviesTotal.reduce((sum:any, count:any) => sum + count, 0)
+    const selectedMoviesTotal = tempMovies.map(movies => movies.total)
+    sumMoviesReduce = selectedMoviesTotal.reduce((sum: any, count: any) => sum + count, 0)
 
     console.log(sumMoviesReduce);
     setPriceTotalOfMovies(sumMoviesReduce)

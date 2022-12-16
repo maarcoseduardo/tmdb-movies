@@ -14,7 +14,7 @@ export function MovieProvider({ children }: MovieProviderProps) {
     const tempMovies = [...moviesList]
     const selectedMovie = tempMovies.find((movie) => movie.id === id)
 
-    if(selectedMovie){
+    if (selectedMovie) {
       selectedMovie.wishList = !selectedMovie.wishList
       setMoviesList(tempMovies)
     }
@@ -25,7 +25,7 @@ export function MovieProvider({ children }: MovieProviderProps) {
       value={{
         moviesList,
         setMoviesList,
-        genres, 
+        genres,
         setGenres,
         search,
         setSearch,
