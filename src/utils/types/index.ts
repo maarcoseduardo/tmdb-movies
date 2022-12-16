@@ -8,13 +8,16 @@ export interface IMovieslist {
   release_date: string
   poster_path: string
   quantity: number
-  price?: number
+  price: number 
+  vote_average: number
   inCart?: boolean
   wishList?: boolean
+  total?: number
 }
 
 export type MoviesListPropsTyped = {
-  moviesData: IMovieslist[]
+  moviesData: IMovieslist[];
+  moviesGenreData: IGenres[];
 }
 
 //Context useMovies
@@ -25,6 +28,8 @@ export interface MovieProviderProps {
 interface IDefaultMovieContextValues {
   moviesList: IMovieslist[]
   setMoviesList: React.Dispatch<React.SetStateAction<IMovieslist[]>>
+  genres: IGenres[]
+  setGenres: React.Dispatch<React.SetStateAction<IGenres[]>>
   search: string
   setSearch: React.Dispatch<React.SetStateAction<string>>
   loadingPage: boolean,
@@ -37,6 +42,8 @@ interface IDefaultMovieContextValues {
 export const defaultMovieContextValues: IDefaultMovieContextValues = {
   moviesList: [],
   setMoviesList: () => [],
+  genres: [],
+  setGenres: () => [],
   search: '',
   setSearch: () => '',
   loadingPage: false,
@@ -84,11 +91,13 @@ export const defaultWishlistValues: IWishlistContextDefaultValues = {
   handleCloseModalWishlist: () => false,
 }
 
-//InCart
+// Movies InCart
 
 interface IDefaultMovieCartContextValues {
   moviesInCart: IMovieslist[];
   setMoviesInCart: React.Dispatch<React.SetStateAction<IMovieslist[]>>
+  priceTotalOfMovies: number
+  setPriceTotalOfMovies: React.Dispatch<React.SetStateAction<number>>
   handleAddItemToCart: (movie: IMovieslist) => void
   handleRemoveItemToCart: (movie: IMovieslist) => void
   handleIncrementQuantityOnMovies: (movie: IMovieslist) => void
@@ -104,16 +113,21 @@ export const defaultMovieCartContextValues: IDefaultMovieCartContextValues = {
     poster_path: '',
     quantity: 1,
     price: 0,
+    vote_average: 0.0,
     inCart: false,
-    wishList: false
+    wishList: false,
+    total: 0
   }],
   setMoviesInCart: () => [],
+  priceTotalOfMovies: 0,
+  setPriceTotalOfMovies: () => 0,
   handleAddItemToCart: (movie: IMovieslist) => {},
   handleRemoveItemToCart: (movie: IMovieslist) => {},
   handleIncrementQuantityOnMovies: (movie: IMovieslist) => {},
   handleDecrementQuantityOnMovies: (movie: IMovieslist) => {}
 }
 
+// Interface Genres
 
 export interface IGenres {
   id: number,
