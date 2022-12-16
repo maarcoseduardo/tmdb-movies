@@ -41,9 +41,9 @@ export function Cards() {
                   <GoStar size={21} />
                 </span>
                 <span>Gênero</span>
-                {/* add api genre documentation*/}
+                 {/* add api genre documentation*/}
               </div>
-              <Price rating={movies.vote_average} />
+              <Price rating={movies.vote_average}/>
               {!movies.inCart ? (
                 <button
                   onClick={() => handleAddItemToCart(movies)}
