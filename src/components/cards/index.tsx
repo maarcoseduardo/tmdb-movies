@@ -44,6 +44,9 @@ export function Cards() {
                  {/* add api genre documentation*/}
               </div>
               <Price rating={movies.vote_average}/>
+                {/* add api genre documentation*/}
+              </div>
+              <Price rating={movies.vote_average} />
               {!movies.inCart ? (
                 <button
                   onClick={() => handleAddItemToCart(movies)}
@@ -53,16 +56,16 @@ export function Cards() {
                 </button>
               ) : (
                 <div className="flex justify-between items-center px-2 w-full border-2 border-solid rounded h-10 border-purple-dark-600">
-                  <button 
-                  className="w-8 font-bold"
-                  onClick={() => handleDecrementQuantityOnMovies(movies)}
+                  <button
+                    className="w-8 font-bold"
+                    onClick={() => handleDecrementQuantityOnMovies(movies)}
                   >
                     -
                   </button>
                   <div>{movies.quantity}</div>
-                  <button 
-                  className="w-8 font-bold"
-                  onClick={() => handleIncrementQuantityOnMovies(movies)}
+                  <button
+                    className="w-8 font-bold"
+                    onClick={() => handleIncrementQuantityOnMovies(movies)}
                   >
                     +
                   </button>

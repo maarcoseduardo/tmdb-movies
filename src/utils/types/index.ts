@@ -12,6 +12,7 @@ export interface IMovieslist {
   vote_average: number
   inCart?: boolean
   wishList?: boolean
+  total?: number
 }
 
 export type MoviesListPropsTyped = {
@@ -90,11 +91,13 @@ export const defaultWishlistValues: IWishlistContextDefaultValues = {
   handleCloseModalWishlist: () => false,
 }
 
-//InCart
+// Movies InCart
 
 interface IDefaultMovieCartContextValues {
   moviesInCart: IMovieslist[];
   setMoviesInCart: React.Dispatch<React.SetStateAction<IMovieslist[]>>
+  priceTotalOfMovies: number
+  setPriceTotalOfMovies: React.Dispatch<React.SetStateAction<number>>
   handleAddItemToCart: (movie: IMovieslist) => void
   handleRemoveItemToCart: (movie: IMovieslist) => void
   handleIncrementQuantityOnMovies: (movie: IMovieslist) => void
@@ -112,15 +115,19 @@ export const defaultMovieCartContextValues: IDefaultMovieCartContextValues = {
     price: 0,
     vote_average: 0.0,
     inCart: false,
-    wishList: false
+    wishList: false,
+    total: 0
   }],
   setMoviesInCart: () => [],
+  priceTotalOfMovies: 0,
+  setPriceTotalOfMovies: () => 0,
   handleAddItemToCart: (movie: IMovieslist) => {},
   handleRemoveItemToCart: (movie: IMovieslist) => {},
   handleIncrementQuantityOnMovies: (movie: IMovieslist) => {},
   handleDecrementQuantityOnMovies: (movie: IMovieslist) => {}
 }
 
+// Interface Genres
 
 export interface IGenres {
   id: number,
