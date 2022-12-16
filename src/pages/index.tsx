@@ -8,7 +8,7 @@ import { MoviesListPropsTyped } from  "../utils/types"
 
 
 export default function Home({ moviesData, moviesGenreData }: MoviesListPropsTyped) {
-  const { setMoviesList, setGenres } = useMovies()
+  const { setMoviesList, genres, setGenres } = useMovies()
 
   useEffect(() => {
     setMoviesList(moviesData)
