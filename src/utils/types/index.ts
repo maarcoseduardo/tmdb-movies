@@ -130,6 +130,6 @@ export const defaultMovieCartContextValues: IDefaultMovieCartContextValues = {
 // Interface Genres
 
 export interface IGenres {
-  id: number,
-  name: string,
+  id: number
+  name: string
 }
