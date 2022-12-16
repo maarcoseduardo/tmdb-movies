@@ -31,7 +31,7 @@ export function FloatWishlistMenu() {
                     <img className='w-10 h-10' src={process.env.NEXT_PUBLIC_API_IMAGE + movie.poster_path} alt={movie.title} />
                     <p className="text-xs">{movie.title}</p>
                   </div>
-                  <span className="text-xs">R$ 79.00</span>
+                  <span className="text-xs">R$ {movie.price}</span>
                   <div className="flex gap-2 w-10">
                     <button onClick={() => handleAddItemToCart(movie)}>
                       <ShoppingCart size={20} />

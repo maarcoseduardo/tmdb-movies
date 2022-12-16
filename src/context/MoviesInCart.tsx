@@ -18,7 +18,7 @@ export function MovieInCartProvider({ children }: MovieProviderProps) {
 
     if (!movie.inCart) {
       const price = getPrice(movie.vote_average)
-      
+
       movie.inCart = true
       movie.quantity = 1
       movie.price = price
