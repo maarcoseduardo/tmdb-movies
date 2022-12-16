@@ -47,3 +47,4 @@ export function useMovies() {
   const { moviesList, setMoviesList, handleToggleItemToWishlist, search, setSearch, loadingPage, setLoadingPage, currentPage, setCurrentPage, genres, setGenres } = context
 
   return { moviesList, setMoviesList, handleToggleItemToWishlist, search, setSearch, loadingPage, setLoadingPage, currentPage, setCurrentPage, genres, setGenres }
+}
