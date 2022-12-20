@@ -24,12 +24,14 @@ export default function Home({ moviesData, moviesGenreData }: MoviesListPropsTyp
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const responseMovies = await api.get(
-    `popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}`,
-  )
+  const responseMovies = await api.get(`popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}` , {
+    headers: { "Accept-Encoding": "gzip, deflate, compress" }
+  })
   const moviesData = await responseMovies.data.results
 
-  const responseGenre = await api_genre.get(`list?api_key=${process.env.NEXT_PUBLIC_API_KEY}`)
+  const responseGenre = await api_genre.get(`list?api_key=${process.env.NEXT_PUBLIC_API_KEY}`, {
+    headers: { "Accept-Encoding": "gzip, deflate, compress" }
+  })
   const moviesGenreData = await responseGenre.data.genres
 
   return {
