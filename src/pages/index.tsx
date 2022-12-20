@@ -3,16 +3,15 @@ import { useEffect } from 'react'
 import { Header } from '../components/header'
 import { Movies } from '../components/movies'
 import { useMovies } from '../context/MoviesContext'
-import { api, api_genre } from '../services/api'
+import { api } from '../services/api'
 import { MoviesListPropsTyped } from  "../utils/types"
 
 
-export default function Home({ moviesData, moviesGenreData }: MoviesListPropsTyped) {
-  const { setMoviesList, setGenres } = useMovies()
+export default function Home({ moviesData }: MoviesListPropsTyped) {
+  const { setMoviesList } = useMovies()
 
   useEffect(() => {
     setMoviesList(moviesData)
-    setGenres(moviesGenreData)
   }, [])
   
   return (
@@ -29,15 +28,9 @@ export const getServerSideProps: GetServerSideProps = async () => {
   })
   const moviesData = await responseMovies.data.results
 
-  const responseGenre = await api_genre.get(`list?api_key=${process.env.NEXT_PUBLIC_API_KEY}`, {
-    headers: { "Accept-Encoding": "gzip, deflate, compress" }
-  })
-  const moviesGenreData = await responseGenre.data.genres
-
   return {
     props: {
       moviesData,
-      moviesGenreData
     },
   }
 }
