@@ -7,7 +7,7 @@ import { Price } from '../price'
 
 export function Cards() {
   const { moviesList, handleToggleItemToWishlist } = useMovies()
-  const { handleAddItemToCart,priceTotalOfMovies, handleIncrementQuantityOnMovies, handleDecrementQuantityOnMovies } = useMoviesInCart()
+  const { handleAddItemToCart, handleIncrementQuantityOnMovies, handleDecrementQuantityOnMovies } = useMoviesInCart()
 
   return (
     <>
