@@ -4,36 +4,36 @@ import {
   MovieProviderProps,
   defaultMovieCartContextValues,
 } from '../utils/types'
-import { getPrice } from "../utils/fn"
+import { getPrice } from '../utils/fn'
 
 export const MoviesInCartContext = createContext(defaultMovieCartContextValues)
 
 export function MovieInCartProvider({ children }: MovieProviderProps) {
   const [moviesInCart, setMoviesInCart] = useState<IMovieslist[]>([])
-  const [priceTotalOfMovies, setPriceTotalOfMovies] = useState(0);
-  let sumMoviesReduce;
+  const [priceTotalOfMovies, setPriceTotalOfMovies] = useState(0)
+  let sumMoviesReduce
 
   function handleAddItemToCart(movie: IMovieslist) {
     const tempMovies = [...moviesInCart]
 
     if (!movie.inCart) {
       const price = getPrice(movie.vote_average)
-      
+
       movie.inCart = true
       movie.quantity = 1
       movie.price = price
       movie.total = movie.price
       setMoviesInCart([...tempMovies, movie])
-      
-      const selectedMoviesTotal = tempMovies.map( movies => movies.total )
-      sumMoviesReduce = selectedMoviesTotal.reduce((sum:any, count:any) => sum + count, movie.price)
+
+      const selectedMoviesTotal = tempMovies.map((movies) => movies.total)
+      sumMoviesReduce = selectedMoviesTotal.reduce((sum: any, count: any) => sum + count, movie.price)
       setPriceTotalOfMovies(sumMoviesReduce)
     }
   }
 
   function handleRemoveItemToCart(movie: IMovieslist) {
     const tempMovies = [...moviesInCart]
-    const selectedMovies = tempMovies.filter( (movieInArray) => movieInArray !== movie)
+    const selectedMovies = tempMovies.filter((movieInArray) => movieInArray !== movie)
 
     movie.inCart = false
     setMoviesInCart(selectedMovies)
@@ -47,8 +47,8 @@ export function MovieInCartProvider({ children }: MovieProviderProps) {
     selectedMovies[0].total = selectedMovies[0].quantity * selectedMovies[0].price
     setMoviesInCart(tempMovies)
 
-    const selectedMoviesTotal = tempMovies.map( movies => movies.total )
-    sumMoviesReduce = selectedMoviesTotal.reduce((sum:any, count:any) => sum + count, 0)
+    const selectedMoviesTotal = tempMovies.map((movies) => movies.total)
+    sumMoviesReduce = selectedMoviesTotal.reduce((sum: any, count: any) => sum + count,0)
     setPriceTotalOfMovies(sumMoviesReduce)
   }
 
@@ -59,11 +59,20 @@ export function MovieInCartProvider({ children }: MovieProviderProps) {
     )
 
     selectedMovies[0].quantity -= 1
+    selectedMovies[0].total = selectedMovies[0].quantity * selectedMovies[0].price
 
     if (selectedMovies[0].quantity <= 0) {
       handleRemoveItemToCart(selectedMovies[0])
+
+      const selectedMoviesTotal = tempMovies.map((movies) => movies.total)
+      sumMoviesReduce = selectedMoviesTotal.reduce((sum: any, count: any) => sum + count,0)
+      setPriceTotalOfMovies(sumMoviesReduce)
     } else {
       setMoviesInCart(tempMovies)
+      
+      const selectedMoviesTotal = tempMovies.map((movies) => movies.total)
+      sumMoviesReduce = selectedMoviesTotal.reduce((sum: any, count: any) => sum + count,0)
+      setPriceTotalOfMovies(sumMoviesReduce)
     }
   }
 
