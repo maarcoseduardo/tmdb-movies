@@ -24,19 +24,20 @@ export function MovieInCartProvider({ children }: MovieProviderProps) {
       movie.price = price
       movie.total = movie.price
       setMoviesInCart([...tempMovies, movie])
+      
+      const selectedMoviesTotal = tempMovies.map( movies => movies.total )
+      sumMoviesReduce = selectedMoviesTotal.reduce((sum:any, count:any) => sum + count, movie.price)
+      setPriceTotalOfMovies(sumMoviesReduce)
     }
   }
 
   function handleRemoveItemToCart(movie: IMovieslist) {
     const tempMovies = [...moviesInCart]
-    const selectedMovies = tempMovies.filter(
-      (movieInArray) => movieInArray !== movie,
-    )
+    const selectedMovies = tempMovies.filter( (movieInArray) => movieInArray !== movie)
 
     movie.inCart = false
     setMoviesInCart(selectedMovies)
   }
-
 
   function handleIncrementQuantityOnMovies(movie: IMovieslist) {
     const tempMovies = [...moviesInCart]
@@ -48,8 +49,6 @@ export function MovieInCartProvider({ children }: MovieProviderProps) {
 
     const selectedMoviesTotal = tempMovies.map( movies => movies.total )
     sumMoviesReduce = selectedMoviesTotal.reduce((sum:any, count:any) => sum + count, 0)
-
-    console.log(sumMoviesReduce);
     setPriceTotalOfMovies(sumMoviesReduce)
   }
 
