@@ -1,9 +1,12 @@
 import { GetServerSideProps } from 'next'
+import { FaTrash } from 'react-icons/fa'
 import { Header } from '../components/header'
 import { useMoviesInCart } from '../context/MoviesInCart'
+import { IMovieslist } from '../utils/types'
 
 export default function Checkout() {
-  const { moviesInCart } = useMoviesInCart()
+  const { moviesInCart, handleRemoveItemToCart } = useMoviesInCart()
+
   return (
     <>
       <Header />
@@ -31,7 +34,9 @@ export default function Checkout() {
                 <img className="w-14 h-14" src={process.env.NEXT_PUBLIC_API_IMAGE + movie.poster_path} alt={movie.title} />
                 <strong>{movie.title}</strong>
                 <div>{movie.quantity}</div>
-                <div>Trash</div>
+                <button onClick={() => handleRemoveItemToCart(movie)}>
+                    <FaTrash />
+                </button>
               </div>
             ))}
           </div>

@@ -1,12 +1,22 @@
 import Modal from 'react-modal'
+import { useRouter } from "next/router"
 import { useModalCart } from '../../context/ModalCartContext'
 import { FaTrash } from 'react-icons/fa'
 import { useMoviesInCart } from '../../context/MoviesInCart'
 
 export function FloatCartMenu() {
-  const { openModalCart, handleCloseModalCart } = useModalCart()
-  const { moviesInCart, handleRemoveItemToCart, priceTotalOfMovies } =
-    useMoviesInCart()
+  const { openModalCart, handleCloseModalCart, setOpenModalCart } = useModalCart()
+  const { 
+    moviesInCart, 
+    handleRemoveItemToCart, 
+    priceTotalOfMovies 
+  } = useMoviesInCart()
+  const router = useRouter()
+
+  function handleCheckout() {
+    setOpenModalCart(false)
+    router.push('/checkout')
+  }
 
   return (
     <>
@@ -51,7 +61,9 @@ export function FloatCartMenu() {
               <span className="text-lg">Total:</span>
               <span className="text-2xl font-bold">R$ {priceTotalOfMovies}</span>
             </div>
-          <button className='w-full rounded h-10 text-[#fff] bg-purple-dark-600'>
+          <button
+          onClick={handleCheckout}
+          className='w-full rounded h-10 text-[#fff] bg-purple-dark-600'>
             Finalizar compra
           </button>
           </div>
