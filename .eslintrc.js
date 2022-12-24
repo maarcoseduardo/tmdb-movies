@@ -7,7 +7,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
   },
-  plugins: ['@typescript-eslint'],
+  plugins: ['@typescript-eslint', "testing-library"],
   rules: {
     
   },
