@@ -2,7 +2,6 @@ import { GetServerSideProps } from 'next'
 import { FaTrash } from 'react-icons/fa'
 import { Header } from '../components/header'
 import { useMoviesInCart } from '../context/MoviesInCart'
-import { IMovieslist } from '../utils/types'
 
 export default function Checkout() {
   const { moviesInCart, handleRemoveItemToCart } = useMoviesInCart()
@@ -31,14 +30,20 @@ export default function Checkout() {
           <div className="max-w-[600px] w-full">
             {moviesInCart.map((movie) => (
               <div key={movie.id} className="flex justify-between items-center">
-                <img className="w-14 h-14" src={process.env.NEXT_PUBLIC_API_IMAGE + movie.poster_path} alt={movie.title} />
-                <strong>{movie.title}</strong>
+                <div className="max-w-[300px] w-full flex gap-14 items-center">
+                <img className="w-16 h-16" src={process.env.NEXT_PUBLIC_API_IMAGE + movie.poster_path} alt={movie.title} />
+                <span>{movie.title}</span>
+                </div>
                 <div>{movie.quantity}</div>
                 <button onClick={() => handleRemoveItemToCart(movie)}>
                     <FaTrash />
                 </button>
               </div>
             ))}
+          <button
+          className='w-full rounded h-10 text-[#fff] bg-purple-dark-600'>
+            Finalizar compra
+          </button>
           </div>
         </form>
       </section>
