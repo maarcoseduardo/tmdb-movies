@@ -1,16 +1,14 @@
 import Modal from 'react-modal'
-import { useRouter } from "next/router"
+import { useRouter } from 'next/router'
 import { useModalCart } from '../../context/ModalCartContext'
 import { FaTrash } from 'react-icons/fa'
 import { useMoviesInCart } from '../../context/MoviesInCart'
 
 export function FloatCartMenu() {
-  const { openModalCart, handleCloseModalCart, setOpenModalCart } = useModalCart()
-  const { 
-    moviesInCart, 
-    handleRemoveItemToCart, 
-    priceTotalOfMovies 
-  } = useMoviesInCart()
+  const { openModalCart, handleCloseModalCart, setOpenModalCart } =
+    useModalCart()
+  const { moviesInCart, handleRemoveItemToCart, priceTotalOfMovies } =
+    useMoviesInCart()
   const router = useRouter()
 
   function handleCheckout() {
@@ -56,16 +54,19 @@ export function FloatCartMenu() {
               </div>
             ))}
           </div>
-          <div className="flex flex-col h-20 justify-between">
-            <div className="flex justify-between w-full">
-              <span className="text-lg">Total:</span>
-              <span className="text-2xl font-bold">R$ {priceTotalOfMovies}</span>
+          <div className='flex flex-col h-20 justify-between'>
+            <div className='flex justify-between w-full'>
+              <span className='text-lg'>Total:</span>
+              <span className='text-2xl font-bold'>
+                R$ {priceTotalOfMovies}
+              </span>
             </div>
-          <button
-          onClick={handleCheckout}
-          className='w-full rounded h-10 text-[#fff] bg-purple-dark-600'>
-            Finalizar compra
-          </button>
+            <button
+              onClick={handleCheckout}
+              className='w-full rounded h-10 text-[#fff] bg-purple-dark-600'
+            >
+              Finalizar compra
+            </button>
           </div>
         </section>
       </Modal>
