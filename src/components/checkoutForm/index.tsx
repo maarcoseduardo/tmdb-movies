@@ -1,4 +1,4 @@
-export function FormCheckout() {
+export function CheckoutForm() {
   return (
     <div className='w-full flex flex-col gap-5'>
       <input

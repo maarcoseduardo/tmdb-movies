@@ -1,7 +1,7 @@
 import { useMoviesInCart } from '../../context/MoviesInCart'
 import { FaTrash } from 'react-icons/fa'
 
-export function CartCheckout() {
+export function CheckoutCart() {
   const { moviesInCart, handleRemoveItemToCart, priceTotalOfMovies } =
     useMoviesInCart()
 
@@ -17,6 +17,7 @@ export function CartCheckout() {
             />
             <span>{movie.title}</span>
           </div>
+          <div>R$ {movie.price}</div>
           <div>{movie.quantity}</div>
           <button onClick={() => handleRemoveItemToCart(movie)}>
             <FaTrash />
