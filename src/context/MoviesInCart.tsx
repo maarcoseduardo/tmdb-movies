@@ -37,6 +37,10 @@ export function MovieInCartProvider({ children }: MovieProviderProps) {
 
     movie.inCart = false
     setMoviesInCart(selectedMovies)
+
+    const selectedMoviesTotal = selectedMovies.map((movies) => movies.total)
+    sumMoviesReduce = selectedMoviesTotal.reduce((sum: any, count: any) => sum + count,0)
+    setPriceTotalOfMovies(sumMoviesReduce)
   }
 
   function handleIncrementQuantityOnMovies(movie: IMovieslist) {
