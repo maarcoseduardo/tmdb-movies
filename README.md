@@ -1,1 +1,1 @@
-## - Em construção - Building -
+## - Em construção - Building - Parei este projeto para estudar NodeJS
